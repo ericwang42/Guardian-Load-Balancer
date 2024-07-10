@@ -2,18 +2,19 @@ from flask import Flask, request
 
 class FlaskApp:
 
-    def __init__
+    def __init__(self):
+        self.app = Flask(__name__)
+        self.setup_routes()
 
-app = Flask(__name__)
+    def setup_routes(self):
+        @self.app.route('/')
+        def index():
+            return 'Welcome to our web server'
 
-@app.route('/')
-def index():
-    return 'Welcome to our web server'
-
-@app.route('/handle_get', methods=['GET'])
-def handle_get():
-    if request.method == 'GET':
-        return 'Hit the GET endpoint', 200
-
-if __name__ == 'main':
-    app.run()
+        @self.app.route('/handle_get', methods=['GET'])
+        def handle_get():
+            if request.method == 'GET':
+                return 'Hit the GET endpoint', 200
+    
+    def run(self):
+        self.app.run()
